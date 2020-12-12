@@ -1,0 +1,128 @@
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- Seleccion familia de productos -->
+    <div class="row">
+      <div class="col-md-4 col-xs-6" *ngFor="let md of metaDataList">
+        <div class="shop">
+          <div class="shop-img">
+            <img src={{md.sourceImg}} alt="">
+          </div>
+          <div class="shop-body">
+            <h3>Seleccion<br>{{md.familyProduct}}</h3>
+            <a href="#" class="cta-btn">Compra ahora <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Seleccion familia de productos -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- SECTION -->
+<div class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <!-- section title -->
+      <div class="col-md-12">
+        <div class="section-title">
+          <div class="container">
+            <h3 class="title">Productos</h3><hr/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-6" *ngFor="let stock of stocks">
+            <div class="card my-2">
+              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock)">
+              <div class="card-header">
+                <div class="card-title">
+                  <p>{{stock.product.name | titlecase}}</p>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6>{{stock.product.description.substr(0, 25)}} ...</h6>
+                <p class="lead">{{stock.product.price | currency: 'USD'}}</p>
+              </div>
+
+              <div class="row d-flex justify-content-center my-3">
+                <div class="col-md-6">
+                  <button class="btn btn-outline-primary btn-sm btn-block"
+                  [class.disabled]="stock.quantity < 1"
+                  [class.btn-outline-danger]="stock.quantity < 1" (click)="goToProduct(stock.product.id)">
+                  {{stock.quantity < 1 ? 'No hay Stock' : 'Agregar al Carrito'}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="newsletter" class="section">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter">
+          <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+          <form>
+            <input class="input" type="email" placeholder="Enter Your Email">
+            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+          </form>
+          <ul class="newsletter-follow">
+            <li>
+              <a href="#"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-pinterest"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+
+
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form>-->
+<!--          <div class="mb-3">-->
+<!--            <label for="recipient-name" class="col-form-label">Recipient:</label>-->
+<!--            <input type="text" class="form-control" id="recipient-name">-->
+<!--          </div>-->
+<!--          <div class="mb-3">-->
+<!--            <label for="message-text" class="col-form-label">Message:</label>-->
+<!--            <textarea class="form-control" id="message-text"></textarea>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Send message</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,143 @@
+<!-- HEADER -->
+<header>
+  <!-- TOP HEADER -->
+  <div id="top-header">
+    <div class="container">
+      <ul class="header-links pull-left">
+        <li><a href="#"><i class="fa fa-phone"></i> +598-99-123-456</a></li>
+        <li><a href="#"><i class="fa fa-envelope-o"></i> info@beneficios-wallet.com</a></li>
+        <li><a href="#"><i class="fa fa-map-marker"></i> Montevideo, Uruguay</a></li>
+      </ul>
+      <ul class="header-links pull-right">
+        <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+        <li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- /TOP HEADER -->
+
+  <!-- MAIN HEADER -->
+  <div id="header">
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="row">
+        <!-- LOGO -->
+        <div class="col-md-3">
+          <div class="header-logo">
+            <a href="#" class="logo">
+              <img src="/assets/img/logo2.png" alt="" width="180px" height="90px">
+            </a>
+          </div>
+        </div>
+        <!-- /LOGO -->
+
+        <!-- SEARCH BAR -->
+        <div class="col-md-6">
+          <div class="header-search">
+            <form>
+              <select class="input-select">
+                <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.id}}">{{familyProduct.name}}</option>
+              </select>
+              <input class="input" placeholder="Search here" style="padding-left: 55px">
+              <button class="search-btn">Search</button>
+            </form>
+          </div>
+        </div>
+        <!-- /SEARCH BAR -->
+
+        <!-- ACCOUNT -->
+        <div class="col-md-3 clearfix">
+          <div class="header-ctn">
+            <!-- Wishlist -->
+            <div>
+              <a href="#">
+                <i class="fa fa-heart-o"></i>
+                <span>Favoritos</span>
+                <div class="qty">0</div>
+              </a>
+            </div>
+            <!-- /Wishlist -->
+
+            <!-- Cart -->
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Tu Pedido</span>
+                <div class="qty">{{this.appComponent.cart.cartLines.length}}</div>
+              </a>
+              <div class="cart-dropdown">
+                <div class="cart-list" *ngIf="appComponent.cart.cartLines.length>0">
+                  <div class="product-widget" *ngFor="let line of appComponent.cart.cartLines">
+                    <div class="product-img">
+                      <img [src]="line.product.imageUrl" alt="" alt="{{line.product.name}}" width="50px">
+                    </div>
+                    <div class="product-body">
+                      <h3 class="product-name"><a href="#">{{line.product.name}}</a></h3>
+                      <h4 class="product-price"><span class="qty">{{line.quantity}}</span>${{line.product.price}}</h4>
+                    </div>
+                    <button class="delete" (click)="deleteLine(line)"><i class="fa fa-close"></i></button>
+                  </div>
+                </div>
+                <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length>0">
+                  <small>{{appComponent.cart.cartLines.length}} Producto(s) </small>
+                  <h5>SUBTOTAL: {{appComponent.cart.cartHeader.total}}</h5>
+                </div>
+
+                <!-- subtotal cuando el carrito esta vacio  -->
+                <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length===0">
+                  <small>0 Productos</small>
+                  <h5>SUBTOTAL: {{ 0 | currency: 'USD'}}</h5>
+                </div>
+                <!-- subtotal cuando el carrito esta vacio  -->
+                <div class="cart-btns">
+                  <a routerLink="/cart">Ver Pedido</a>
+                  <a routerLink="/checkout">Pagar <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- /Cart -->
+
+            <!-- Menu Toogle -->
+            <div class="menu-toggle">
+              <a href="#">
+                <i class="fa fa-bars"></i>
+                <span>Menu</span>
+              </a>
+            </div>
+            <!-- /Menu Toogle -->
+          </div>
+        </div>
+        <!-- /ACCOUNT -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+  <!-- container -->
+  <div class="container">
+    <!-- responsive-nav -->
+    <div id="responsive-nav">
+      <!-- NAV -->
+      <ul class="main-nav nav py-2">
+        <li style="float: left"><a routerLink="/">Home</a></li>
+        <li style="float: left;"><a href="#">Productos</a></li>
+        <li style="float: left"><a href="#">Mis Pedidos</a></li>
+        <li style="float: left"><a href="#">Configuracion</a></li>
+<!--        <li style="float: left"><a href="#">Smartphones</a></li>-->
+<!--        <li style="float: left"><a href="#">Cameras</a></li>-->
+<!--        <li style="float: left"><a href="#">Accessories</a></li>-->
+      </ul>
+      <!-- /NAV -->
+    </div>
+    <!-- /responsive-nav -->
+  </div>
+  <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
