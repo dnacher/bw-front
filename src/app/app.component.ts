@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import {Cart} from "./classes/Cart";
-import {CartLine} from "./classes/CartLine";
-import {isNull} from "util";
 
 @Component({
   selector: 'app-root',
