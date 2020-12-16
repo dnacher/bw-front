@@ -27,9 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   deleteLine(line: CartLine) {
-    let ind = this.appComponent.cart.cartLines.indexOf(line);
-    this.appComponent.cart.cartHeader.total-=line.subTotal;
-    this.appComponent.cart.cartLines.splice(ind,1);
+    this.appComponent.cart.deleteLine(line);
   }
 
 }
