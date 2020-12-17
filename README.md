@@ -1,3 +1,11 @@
+# proyectos:
+## BD
+https://console.clever-cloud.com/users/me/addons/addon_63beda37-47b5-4d38-bae6-d467435489b6
+## Angular
+https://app.netlify.com/sites/agitated-borg-d2ef47/settings/domain
+## Java
+https://dashboard.heroku.com/apps/ship-back/deploy/github
+
 # Bw front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
