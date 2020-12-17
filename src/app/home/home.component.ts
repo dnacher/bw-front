@@ -5,6 +5,7 @@ import {DataStockService} from "../services/data.stock.service";
 import {Stock} from "../classes/Stock";
 import {CartLine} from "../classes/CartLine";
 import {AppComponent} from "../app.component";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private dataStockService: DataStockService,
               private router: Router,
-              private appComponent: AppComponent) { }
+              private appComponent: AppComponent,
+              private toast: ToastrService) { }
 
   ngOnInit() {
     this.loadMetaData();
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit {
     this.getTotal();
     // @ts-ignore
     localStorage.setItem('cart', this.appComponent.cart);
+    this.displayMessage(stock.product.name)
   }
 
   getTotal(){
@@ -93,5 +96,14 @@ export class HomeComponent implements OnInit {
 
   goToProduct(id: number) {
     this.router.navigate(['/product', id]).then();
+  }
+
+  displayMessage(nombre: string){
+    this.toast.info(`${nombre} agregado al pedido`, "Product Agregado", {
+      timeOut: 1500,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      positionClass: 'toast-top-right'
+    })
   }
 }
