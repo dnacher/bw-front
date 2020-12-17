@@ -36,26 +36,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 col-sm-6" *ngFor="let stock of stocks">
-            <div class="card my-2">
-              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock)">
+          <div class="col-md-3 col-sm-3" *ngFor="let stock of stocks">
+            <div class="card my-1">
+              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock,1)">
               <div class="card-header">
                 <div class="card-title">
-                  <p>{{stock.product.name | titlecase}}</p>
-                </div>
-              </div>
-              <div class="card-body">
-                <h6>{{stock.product.description.substr(0, 25)}} ...</h6>
-                <p class="lead">{{stock.product.price | currency: 'USD'}}</p>
-              </div>
-
-              <div class="row d-flex justify-content-center my-3">
-                <div class="col-md-6">
-                  <button class="btn btn-outline-primary btn-sm btn-block"
-                  [class.disabled]="stock.quantity < 1"
-                  [class.btn-outline-danger]="stock.quantity < 1" (click)="goToProduct(stock.product.id)">
-                  {{stock.quantity < 1 ? 'No hay Stock' : 'Agregar al Carrito'}}
-                  </button>
+                  <p *ngIf="stock.product.name.length>22">{{stock.product.name.substr(0,22) | titlecase}} ...</p>
+                  <p *ngIf="stock.product.name.length<=22">{{stock.product.name | titlecase}}</p>
+                  <p class="my-3" align="center">{{stock.product.price | currency: 'USD'}}
+                    <i class="fa fa-plus-circle" (click)="selectProductValue(stock)"></i></p>
                 </div>
               </div>
             </div>

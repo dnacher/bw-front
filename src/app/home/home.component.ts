@@ -6,6 +6,7 @@ import {Stock} from "../classes/Stock";
 import {CartLine} from "../classes/CartLine";
 import {AppComponent} from "../app.component";
 import {ToastrService} from "ngx-toastr";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-home',
@@ -40,15 +41,15 @@ export class HomeComponent implements OnInit {
   }
 
 
-  selectProduct(stock: Stock) {
-    let cartLine = this.createCartLine(stock);
+  selectProduct(stock: Stock, value: number) {
+    let cartLine = this.createCartLine(stock,value);
     if(this.appComponent.cart.cartLines.length==0) {
       this.appComponent.cart.cartLines.push(cartLine);
     }else{
       let ind = this.checkCartLine(cartLine.product.id);
       if(ind!=-1){
         cartLine.quantity = this.appComponent.cart.cartLines[ind].quantity;
-        this.modifyCartLine(cartLine);
+        this.modifyCartLine(cartLine,value);
         this.appComponent.cart.cartLines[ind] = cartLine;
       }else{
         this.appComponent.cart.cartLines.push(cartLine);
@@ -79,16 +80,16 @@ export class HomeComponent implements OnInit {
     return ind;
   }
 
-  modifyCartLine(cartLine: CartLine){
-    cartLine.quantity+=1;
+  modifyCartLine(cartLine: CartLine, value: number){
+    var y: number = +value;
+    cartLine.quantity+= y;
     cartLine.subTotal= cartLine.quantity*cartLine.product.price;
   }
 
-  createCartLine(stock: Stock): CartLine{
+  createCartLine(stock: Stock, value: number): CartLine{
     let cartLine= new CartLine();
     cartLine.product = stock.product;
-    //for now we have only one product each time.
-    cartLine.quantity = 1
+    cartLine.quantity = +value;
     cartLine.subTotal = cartLine.quantity * stock.product.price;
     cartLine.cartHeader = this.appComponent.cart.cartHeader;
     return cartLine;
@@ -99,11 +100,30 @@ export class HomeComponent implements OnInit {
   }
 
   displayMessage(nombre: string){
-    this.toast.info(`${nombre} agregado al pedido`, "Product Agregado", {
-      timeOut: 1500,
-      progressBar: true,
-      progressAnimation: 'increasing',
-      positionClass: 'toast-top-right'
+    Swal.fire({
+      icon: "success",
+      title: 'Producto Agregado',
+      html: 'Se agrego '+ nombre,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      }
     })
+  }
+
+  selectProductValue(stock: Stock) {
+     let value = Swal.fire({
+      icon:"question",
+      title: stock.product.name,
+      input:"number",
+       html: 'Producto '+ stock.product.name,
+      cancelButtonText: 'Cancelar',
+       confirmButtonText: 'Agregar'
+    });
+     value.then(val=>{
+       let value:number = val.value;
+       this.selectProduct(stock,value);
+     });
   }
 }
