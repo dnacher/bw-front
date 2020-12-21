@@ -1,10 +1,12 @@
 # proyectos:
-## live
-https://beneficioswallet.netlify.app/
+
+# Live: https://beneficioswallet.netlify.app/
+
+
 ## BD
 https://console.clever-cloud.com/users/me/addons/addon_63beda37-47b5-4d38-bae6-d467435489b6
 ## Angular
-https://app.netlify.com/sites/agitated-borg-d2ef47/settings/domain
+https://app.netlify.com/sites/beneficioswallet/overview
 ## Java
 https://dashboard.heroku.com/apps/ship-back/deploy/github
 
@@ -24,3 +26,6 @@ Color azul claro     #00B0F0e6
 ## font      
 Beneficios (Malgun Gothic)
 Wallet (Malgun Gothic Semilight)
+
+## building project
+ng build --configuration=production
