@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable, of} from 'rxjs';
 import {environment} from "../../environments/environment";
-import {Address} from "../classes/Address";
+import {Cart} from "../classes/Cart";
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class DataAddressService {
+export class DataCartService {
 
-  private baseUrl = environment.privateBaseUrl + '/addresses/';
+  private baseUrl = environment.baseUrl + '/carts/';
 
   constructor(private http: HttpClient) {}
 
@@ -28,24 +28,40 @@ export class DataAddressService {
     return header;
   }
 
-  getAddress(token: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}`,this.setHeader(token));
+  // getCart(token: string): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}`,this.setHeader(token));
+  // }
+  //
+  // getCartByHeaderId(id: any, token: string): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}${id}`, this.setHeader(token));
+  // }
+  //
+  // saveCart(cart: Cart, token: string): Observable<any> {
+  //   return this.http.post(`${this.baseUrl}`, cart,this.setHeader(token));
+  // }
+  //
+  // updateCart(cart: Cart, token: string): Observable<any> {
+  //   return this.http.put(`${this.baseUrl}`, cart, this.setHeader(token));
+  // }
+  //
+  // deleteCart(id: number, token: string): Observable<any> {
+  //   return this.http.delete(`${this.baseUrl}/${id}`, this.setHeader(token));
+  // }
+
+  getCartByHeaderId(id: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}${id}`);
   }
 
-  getAddressById(id: any, token: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}${id}`, this.setHeader(token));
+  saveCart(cart: Cart): Observable<any> {
+    return this.http.post(`${this.baseUrl}`,cart);
   }
 
-  saveAddress(address: Address, token: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, address,this.setHeader(token));
+  updateCart(cart: Cart): Observable<any> {
+    return this.http.put(`${this.baseUrl}`, cart);
   }
 
-  updateAddress(address: Address, token: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}`, address, this.setHeader(token));
-  }
-
-  deleteAddress(id: number, token: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, this.setHeader(token));
+  deleteCart(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
 }
