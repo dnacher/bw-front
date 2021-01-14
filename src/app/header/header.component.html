@@ -4,13 +4,14 @@
   <div id="top-header">
     <div class="container">
       <ul class="header-links pull-left">
-        <li><a href="#"><i class="fa fa-phone"></i> +598-99-123-456</a></li>
-        <li><a href="#"><i class="fa fa-envelope-o"></i> info@beneficios-wallet.com</a></li>
-        <li><a href="#"><i class="fa fa-map-marker"></i> Montevideo, Uruguay</a></li>
+<!--        <li><a href="#"><i class="fa fa-phone"></i> +598-99-123-456</a></li>-->
+<!--        <li><a href="#"><i class="fa fa-envelope-o"></i> info@beneficios-wallet.com</a></li>-->
+<!--        <li><a href="#"><i class="fa fa-map-marker"></i> Montevideo, Uruguay</a></li>-->
       </ul>
       <ul class="header-links pull-right">
-        <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-        <li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
+<!--        <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
+        <li *ngIf="!appComponent.isAuthenticated()"><a (click)="login()"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
+        <li *ngIf="appComponent.isAuthenticated()"><a><i class="fa fa-user-o"></i> {{getFullName()}} </a> <a (click)="logout()"> Logout <i class="fa fa-sign-out"></i></a> </li>
       </ul>
     </div>
   </div>
@@ -125,15 +126,7 @@
     <!-- responsive-nav -->
     <div id="responsive-nav">
       <!-- NAV -->
-      <ul class="main-nav nav py-2">
-        <li style="float: left"><a routerLink="/">Home</a></li>
-        <li style="float: left;"><a href="#">Productos</a></li>
-        <li style="float: left"><a href="#">Mis Pedidos</a></li>
-        <li style="float: left"><a href="#">Configuracion</a></li>
-<!--        <li style="float: left"><a href="#">Smartphones</a></li>-->
-<!--        <li style="float: left"><a href="#">Cameras</a></li>-->
-<!--        <li style="float: left"><a href="#">Accessories</a></li>-->
-      </ul>
+      <app-general-menu></app-general-menu>
       <!-- /NAV -->
     </div>
     <!-- /responsive-nav -->

@@ -15,15 +15,16 @@ import Swal from "sweetalert2";
 })
 export class HomeComponent implements OnInit {
 
-  private metaDataList: Array<MetaData> = [];
-  private stocks: Array<Stock> = [];
+  public metaDataList: Array<MetaData> = [];
+  public stocks: Array<Stock> = [];
 
   constructor(private dataStockService: DataStockService,
               private router: Router,
-              private appComponent: AppComponent,
+              public appComponent: AppComponent,
               private toast: ToastrService) { }
 
   ngOnInit() {
+    this.appComponent.checkCart();
     this.loadMetaData();
     this.loadProduct();
   }
@@ -44,20 +45,22 @@ export class HomeComponent implements OnInit {
   selectProduct(stock: Stock, value: number) {
     let cartLine = this.createCartLine(stock,value);
     if(this.appComponent.cart.cartLines.length==0) {
+      cartLine.cartHeader= this.appComponent.cart.cartHeader;
       this.appComponent.cart.cartLines.push(cartLine);
     }else{
       let ind = this.checkCartLine(cartLine.product.id);
       if(ind!=-1){
         cartLine.quantity = this.appComponent.cart.cartLines[ind].quantity;
         this.modifyCartLine(cartLine,value);
+        cartLine.cartHeader= this.appComponent.cart.cartHeader;
         this.appComponent.cart.cartLines[ind] = cartLine;
       }else{
+        cartLine.cartHeader= this.appComponent.cart.cartHeader;
         this.appComponent.cart.cartLines.push(cartLine);
       }
     }
     this.getTotal();
-    // @ts-ignore
-    localStorage.setItem('cart', this.appComponent.cart);
+    this.appComponent.saveCartLocalStorage();
     this.displayMessage(stock.product.name)
   }
 
@@ -104,7 +107,7 @@ export class HomeComponent implements OnInit {
       icon: "success",
       title: 'Producto Agregado',
       html: 'Se agrego '+ nombre,
-      timer: 1000,
+      timer: 900,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading()
@@ -115,15 +118,20 @@ export class HomeComponent implements OnInit {
   selectProductValue(stock: Stock) {
      let value = Swal.fire({
       icon:"question",
+      imageUrl: stock.product.imageUrl,
+      imageWidth: 200,
+      imageHeight: 200,
       title: stock.product.name,
       input:"number",
-       html: 'Producto '+ stock.product.name,
-      cancelButtonText: 'Cancelar',
-       confirmButtonText: 'Agregar'
+       inputValue: 1,
+      html: 'Producto '+ stock.product.name,
+      confirmButtonText: 'Agregar'
     });
      value.then(val=>{
-       let value:number = val.value;
-       this.selectProduct(stock,value);
+       if(val.value>0){
+         let value:number = val.value;
+         this.selectProduct(stock,value);
+       }
      });
   }
 }
