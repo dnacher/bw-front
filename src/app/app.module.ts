@@ -13,6 +13,9 @@ import { ProductComponent } from './product/product.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {FormsModule} from "@angular/forms";
+import { GeneralMenuComponent } from './general-menu/general-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +27,17 @@ import {ToastrModule} from "ngx-toastr";
     HomeComponent,
     ProductComponent,
     ThankyouComponent,
+    GeneralMenuComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ToastrModule.forRoot(),
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ToastrModule.forRoot(),
+        NgxSpinnerModule,
+        FormsModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
