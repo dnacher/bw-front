@@ -1,1 +1,165 @@
-<p>checkout works!</p>
+<ngx-spinner
+  bdColor= "rgba(151,149,149,0.4)"
+  size="large"
+  color="orange"
+  type="ball-clip-rotate-pulse"
+  fullScreen="true"
+>
+  <p style="font-size: 20px; color: black">Enviando Orden al comercio...</p>
+</ngx-spinner>
+
+<div class="section" *ngIf="appComponent.cart.cartHeader.total > 0">
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="row">
+
+      <div class="col-md-7">
+        <!-- Billing Details -->
+        <div class="billing-details">
+          <div class="section-title">
+            <h3 class="title">Informacion de envio</h3>
+          </div>
+          <div class="form-group">
+            <input class="input" type="text" name="first-name" placeholder="Nombre" [(ngModel)]="user.firstName">
+          </div>
+          <div class="form-group">
+            <input class="input" type="text" name="last-name" placeholder="Apellido" [(ngModel)]="user.lastName">
+          </div>
+          <div class="form-group">
+            <input class="input" type="email" name="email" placeholder="Email" [(ngModel)]="user.email">
+          </div>
+          <div class="form-group">
+            <input class="input" type="password" name="password" placeholder="Contraseña" [(ngModel)]="user.password">
+          </div>
+          <div class="form-group">
+            <div class="input-checkbox">
+              <input type="checkbox" id="create-account">
+              <label for="create-account">
+                <span></span>
+                Donde te enviamos el pedido?
+              </label>
+              <div class="caption">
+                <p>Direccion</p>
+                <div class="form-group">
+                  <input class="input" type="text" name="alias" placeholder="Alias" [(ngModel)]="address.alias">
+                </div>
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col">
+                      <input class="input" type="text" name="Calle" placeholder="Calle" [(ngModel)]="address.street">
+                    </div>
+                    <div class="col">
+                      <input class="input" type="number" name="Numero" placeholder="Numero" [(ngModel)]="address.number">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="input" type="text" name="esquina" placeholder="Esquina" [(ngModel)]="address.street2">
+                </div>
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <input class="input" type="text" name="block" placeholder="Block" [(ngModel)]="address.block">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <input class="input" type="text" name="apartamento" placeholder="Apartamento" [(ngModel)]="address.apartment">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="input" type="text" name="telefono" placeholder="Telefono" [(ngModel)]="address.phoneNumber">
+                </div>
+                Pais - Ciudad - Barrio
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Billing Details -->
+        <!-- Order notes -->
+        <div class="order-notes">
+          <textarea class="input" placeholder="Detalles" [(ngModel)]="appComponent.cart.cartHeader.observation"></textarea>
+        </div>
+        <!-- /Order notes -->
+      </div>
+
+      <!-- Order Details -->
+      <div class="col-md-5 order-details">
+        <div class="section-title text-center">
+          <h3 class="title">Tu Pedido</h3>
+        </div>
+        <div class="order-summary">
+          <div class="order-col">
+            <div><strong>PRODUCTO</strong></div>
+            <div><strong>SubTotal</strong></div>
+          </div>
+          <div class="order-products">
+            <div class="order-col" *ngFor="let c of appComponent.cart.cartLines;">
+              <div>{{c.quantity}}x {{c.product.name}}</div>
+              <div>{{(c.product.price*c.quantity) | currency:'USD'}}</div>
+            </div>
+          </div>
+          <div class="order-col">
+            <div>Envio</div>
+            <div><strong>Gratis</strong></div>
+          </div>
+          <div class="order-col dropdown-divider">
+            <div><strong>TOTAL</strong></div>
+            <div><strong class="order-total">{{appComponent.cart.cartHeader.total | currency:'USD'}}</strong></div>
+          </div>
+        </div>
+        <div class="payment-method">
+          <div class="input-radio">
+            <input type="radio" name="payment" id="payment-1">
+            <label for="payment-1">
+              <span></span>
+              Direct Bank Transfer
+            </label>
+            <div class="caption">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+          <div class="input-radio">
+            <input type="radio" name="payment" id="payment-2">
+            <label for="payment-2">
+              <span></span>
+              Cheque Payment
+            </label>
+            <div class="caption">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+          <div class="input-radio">
+            <input type="radio" name="payment" id="payment-3">
+            <label for="payment-3">
+              <span></span>
+              Paypal System
+            </label>
+            <div class="caption">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+        </div>
+        <div class="input-checkbox">
+          <input type="checkbox" id="terms">
+          <label for="terms">
+            <span></span>
+            Lei y acepto los <a href="#">terminos y condiciones</a>
+          </label>
+        </div>
+        <button type="submit" class="btn-danger btn-sm btn-block rounded-pill" [disabled]="appComponent.cart.cartHeader.total <= 0 " (click)="onCheckout()">Realizar pedido</button>
+      </div>
+      <!-- /Order Details -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<div class="text-center my-5" *ngIf="appComponent.cart.cartHeader.total <= 0">
+  <h4>El pedido esta vacio</h4>
+  <button class="btn btn-primary btn-lg mt-3" routerLink="/">Seguir Comprando</button>
+</div>
