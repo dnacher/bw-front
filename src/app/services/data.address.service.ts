@@ -10,7 +10,7 @@ import {Address} from "../classes/Address";
 
 export class DataAddressService {
 
-  private baseUrl = environment.privateBaseUrl + '/addresses/';
+  private baseUrl = environment.baseUrl + '/addresses';
 
   constructor(private http: HttpClient) {}
 
@@ -36,8 +36,16 @@ export class DataAddressService {
     return this.http.get(`${this.baseUrl}${id}`, this.setHeader(token));
   }
 
-  saveAddress(address: Address, token: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}`, address,this.setHeader(token));
+  // saveAddress(address: Address, token: string): Observable<any> {
+  //   return this.http.post(`${this.baseUrl}`, address,this.setHeader(token));
+  // }
+
+  saveAddress(address: Address): Observable<any> {
+console.log("entre al servicio");
+console.log(this.baseUrl);
+    // return this.http.post(`${this.baseUrl}/`, address);
+    console.log(address);
+  return this.http.post(`${environment.baseUrl}` + '/addresses/',address);
   }
 
   updateAddress(address: Address, token: string): Observable<any> {
