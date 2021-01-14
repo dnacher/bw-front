@@ -1,1 +1,43 @@
-<p>thankyou works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron text-center">
+        <h1 class="display-3">Gracias!</h1>
+        <p class="lead"><strong>Tu pedido fue enviado al</strong> comercio.</p>
+        <hr>
+        <p>
+
+        <p>Orden Nº : <strong>{{this.cart.cartHeader.id}}</strong></p>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of this.cart.cartLines">
+          <td>
+            <img [src]="p.product.imageUrl" alt="{{p.product.name}}" class="img-thumbnail" width="100px">
+          </td>
+          <td>{{p.product.description}}</td>
+          <td>{{p.product.price | currency:'USD'}}</td>
+          <td>{{p.quantity}}</td>
+        </tr>
+
+        <tr class="border-0">
+          <td style="border: none;"></td>
+          <td></td>
+          <td>TOTAL</td>
+          <td>{{this.cart.cartHeader.total | currency:'USD'}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
