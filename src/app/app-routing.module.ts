@@ -6,7 +6,6 @@ import {CartComponent} from "./cart/cart.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
 import {ThankyouComponent} from "./thankyou/thankyou.component";
 
-
 const routes: Routes = [
   {
     path: '', component: HomeComponent
@@ -22,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'thankyou', component: ThankyouComponent
-  }
+  },
 ];
 
 @NgModule({
