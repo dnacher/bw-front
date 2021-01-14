@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {Cart} from "./classes/Cart";
+import {CartLine} from "./classes/CartLine";
+import {User} from "./classes/User";
+import {JwtResponse} from "./classes/JwtResponse";
 
 @Component({
   selector: 'app-root',
@@ -9,4 +12,63 @@ import {Cart} from "./classes/Cart";
 export class AppComponent {
   title = 'bw-front';
   public cart = new Cart();
+  public user: User;
+  public jwtResponse: JwtResponse= new JwtResponse();
+
+  public checkCart(){
+    if(this.cart==null){
+      // @ts-ignore
+      if(localStorage.getItem('cart')){
+        // @ts-ignore
+        this.cart= JSON.parse(localStorage.getItem('cart'));
+      }else{
+        this.cart = new Cart();
+      }
+    }else{
+      if(this.cart.cartLines.length<1){
+        // @ts-ignore
+        if(localStorage.getItem('cart')){
+          // @ts-ignore
+          this.cart= JSON.parse(localStorage.getItem('cart'));
+        }
+      }
+    }
+  }
+
+  public isAuthenticated(): boolean{
+    console.log("is authenticated");
+    if(this.jwtResponse.token!==null){
+      let now = new Date();
+      this.jwtResponse.expirationDate = new Date(this.jwtResponse.expirationDate);
+      if(now<this.jwtResponse.expirationDate){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public saveCartLocalStorage(){
+    // @ts-ignore
+    localStorage.setItem('cart',JSON.stringify(this.cart));
+  }
+
+  public deleteCartLocalStorage(){
+    // @ts-ignore
+    localStorage.removeItem('cart');
+  }
+
+  public updateTotal(){
+    let total=0;
+    for(let x=0; x<this.cart.cartLines.length;x++){
+      total+=this.cart.cartLines[x].quantity*this.cart.cartLines[x].product.price;
+    }
+    this.cart.cartHeader.total=total;
+    this.saveCartLocalStorage();
+  }
+
+  public deleteCartLine(line: CartLine) {
+    let ind = this.cart.cartLines.indexOf(line);
+    this.cart.cartLines.splice(ind,1);
+    this.updateTotal();
+  }
 }
