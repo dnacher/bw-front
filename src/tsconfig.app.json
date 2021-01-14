@@ -5,7 +5,8 @@
     "types": ["node"],
     "lib": [
       "es2015.core",
-      "es2015.symbol.wellknown"
+      "es2015.symbol.wellknown",
+      "dom"
     ]
   },
   "exclude": [
