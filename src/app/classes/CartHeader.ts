@@ -19,6 +19,7 @@ export class CartHeader{
     this.user = new User();
     this.delivery= new User();
     this.total=0;
+    this.observation="";
   }
 
 }

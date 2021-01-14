@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppComponent} from "../app.component";
 import {CartLine} from "../classes/CartLine";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,7 @@ import {CartLine} from "../classes/CartLine";
 })
 export class CartComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent) { }
+  constructor(public appComponent: AppComponent) { }
 
   ngOnInit() {
   }
@@ -21,14 +22,32 @@ export class CartComponent implements OnInit {
       if(cl.quantity>1){
         cl.quantity-=1;
       }else{
-        this.appComponent.cart.deleteLine(cl);
+        Swal.fire({
+          title: 'Estas seguro?',
+          text: "estas seguro que deseas borrar el producto " + cl.product.name + " de tu carrito?",
+          icon: 'error',
+          showCancelButton: true,
+          confirmButtonColor: '#00B0F0',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Borrarlo!',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Borrado!',
+              'El producto se borro de tu pedido',
+              'success'
+            )
+            this.appComponent.deleteCartLine(cl);
+          }
+        })
       }
     }
-    this.appComponent.cart.updateTotal();
+    this.appComponent.updateTotal();
   }
 
   deleteLine(c: CartLine) {
-    this.appComponent.cart.deleteLine(c);
+    this.appComponent.deleteCartLine(c);
   }
 
 }
