@@ -69,7 +69,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
-    // @ts-ignore
     localStorage.setItem('jwtResponse',null);
     this.appComponent.jwtResponse = new JwtResponse();
   }
@@ -116,8 +115,6 @@ export class HeaderComponent implements OnInit {
     this.dataUserService.login(this.jwtRequest).subscribe(
       data => {
         this.jwtResponse = data,
-          console.log(this.jwtResponse);
-        // @ts-ignore
         localStorage.setItem('jwtResponse', JSON.stringify(this.jwtResponse));
         this.appComponent.jwtResponse = this.jwtResponse;
         this.router.navigate(['/']).then();

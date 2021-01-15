@@ -65,31 +65,30 @@
               <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                 <i class="fa fa-shopping-cart"></i>
                 <span>Tu Pedido</span>
-                <div class="qty">{{this.appComponent.cart.cartLines.length}}</div>
+                  <div class="qty">{{this.appComponent.cart.cartLines.length}}</div>
               </a>
               <div class="cart-dropdown">
-                <div class="cart-list" *ngIf="appComponent.cart.cartLines.length>0">
-                  <div class="product-widget" *ngFor="let line of appComponent.cart.cartLines">
-                    <div class="product-img">
-                      <img [src]="line.product.imageUrl" alt="" alt="{{line.product.name}}" width="50px">
+                  <div class="cart-list" *ngIf="appComponent.cart.cartLines.length>0">
+                    <div class="product-widget" *ngFor="let line of appComponent.cart.cartLines">
+                      <div class="product-img">
+                        <img [src]="line.product.imageUrl" alt="" alt="{{line.product.name}}" width="50px">
+                      </div>
+                      <div class="product-body">
+                        <h3 class="product-name"><a href="#">{{line.product.name}}</a></h3>
+                        <h4 class="product-price"><span class="qty">{{line.quantity}}</span>${{line.product.price}}</h4>
+                      </div>
+                      <button class="delete" (click)="deleteLine(line)"><i class="fa fa-close"></i></button>
                     </div>
-                    <div class="product-body">
-                      <h3 class="product-name"><a href="#">{{line.product.name}}</a></h3>
-                      <h4 class="product-price"><span class="qty">{{line.quantity}}</span>${{line.product.price}}</h4>
-                    </div>
-                    <button class="delete" (click)="deleteLine(line)"><i class="fa fa-close"></i></button>
                   </div>
-                </div>
-                <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length>0">
-                  <small>{{appComponent.cart.cartLines.length}} Producto(s) </small>
-                  <h5>SUBTOTAL: {{appComponent.cart.cartHeader.total}}</h5>
-                </div>
-
+                  <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length>0">
+                    <small>{{appComponent.cart.cartLines.length}} Producto(s) </small>
+                    <h5>SUBTOTAL: {{appComponent.cart.cartHeader.total}}</h5>
+                  </div>
                 <!-- subtotal cuando el carrito esta vacio  -->
-                <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length===0">
-                  <small>0 Productos</small>
-                  <h5>SUBTOTAL: {{ 0 | currency: 'USD'}}</h5>
-                </div>
+                  <div class="cart-summary" *ngIf="appComponent.cart.cartLines.length===0">
+                    <small>0 Productos</small>
+                    <h5>SUBTOTAL: {{ 0 | currency: 'USD'}}</h5>
+                  </div>
                 <!-- subtotal cuando el carrito esta vacio  -->
                 <div class="cart-btns">
                   <a routerLink="/cart">Ver Pedido</a>

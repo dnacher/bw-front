@@ -17,18 +17,18 @@ export class AppComponent {
 
   public checkCart(){
     if(this.cart==null){
-      // @ts-ignore
       if(localStorage.getItem('cart')){
-        // @ts-ignore
         this.cart= JSON.parse(localStorage.getItem('cart'));
       }else{
         this.cart = new Cart();
       }
     }else{
+      if(this.cart.cartLines==null){
+        this.cart.cartLines= new Array;
+      }
       if(this.cart.cartLines.length<1){
-        // @ts-ignore
         if(localStorage.getItem('cart')){
-          // @ts-ignore
+          var test:string = localStorage.getItem('cart').toString();
           this.cart= JSON.parse(localStorage.getItem('cart'));
         }
       }
@@ -36,7 +36,6 @@ export class AppComponent {
   }
 
   public isAuthenticated(): boolean{
-    console.log("is authenticated");
     if(this.jwtResponse.token!==null){
       let now = new Date();
       this.jwtResponse.expirationDate = new Date(this.jwtResponse.expirationDate);
@@ -48,12 +47,10 @@ export class AppComponent {
   }
 
   public saveCartLocalStorage(){
-    // @ts-ignore
     localStorage.setItem('cart',JSON.stringify(this.cart));
   }
 
   public deleteCartLocalStorage(){
-    // @ts-ignore
     localStorage.removeItem('cart');
   }
 

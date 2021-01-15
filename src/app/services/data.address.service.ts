@@ -41,11 +41,7 @@ export class DataAddressService {
   // }
 
   saveAddress(address: Address): Observable<any> {
-console.log("entre al servicio");
-console.log(this.baseUrl);
-    // return this.http.post(`${this.baseUrl}/`, address);
-    console.log(address);
-  return this.http.post(`${environment.baseUrl}` + '/addresses/',address);
+    return this.http.post(`${environment.baseUrl}` + '/addresses/',address);
   }
 
   updateAddress(address: Address, token: string): Observable<any> {
