@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MetaData} from "../classes/metaData";
 import {Router} from "@angular/router";
 import {DataStockService} from "../services/data.stock.service";
@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
 
@@ -26,7 +26,32 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.appComponent.checkCart();
     this.loadMetaData();
-    this.loadProduct();
+    this.loadProduct('Todo');
+  }
+
+  public loadProduct(name){
+    console.log(name);
+    this.stocks= new Array<Stock>();
+    this.dataStockService.getStocks().subscribe(data => {
+      this.stocks = data;
+      if(name!='Todo'){
+        this.stocks = this.stocks.filter(s=>{
+          return s.product.familyProduct.name==name;
+        });
+      }
+      console.log('onload stock ',this.stocks);
+    });
+  }
+
+  public loadProductOnName(name){
+    console.log(name);
+    this.dataStockService.getStocks().subscribe(data => {
+      this.stocks = data;
+        this.stocks = this.stocks.filter(s=>{
+          return s.product.name.startsWith(name);
+        });
+      console.log('onload stock ',this.stocks);
+    });
   }
 
   loadMetaData(){
@@ -34,13 +59,6 @@ export class HomeComponent implements OnInit {
                           new MetaData('Carnes','../../assets/img/shop02.png'),
                           new MetaData('Pasta','../../assets/img/shop03.png'));
   }
-
-  loadProduct(){
-    this.dataStockService.getStocks().subscribe(data => {
-        this.stocks = data;
-      });
-  }
-
 
   selectProduct(stock: Stock, value: number) {
     let cartLine = this.createCartLine(stock,value);
