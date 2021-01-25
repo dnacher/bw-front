@@ -38,7 +38,7 @@ import { GeneralMenuComponent } from './general-menu/general-menu.component';
         NgxSpinnerModule,
         FormsModule,
     ],
-  providers: [],
+  providers: [HomeComponent,AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
