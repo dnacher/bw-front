@@ -37,8 +37,8 @@
         <div class="col-md-6">
           <div class="header-search">
             <form>
-              <select class="input-select">
-                <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.id}}">{{familyProduct.name}}</option>
+              <select class="input-select" [(ngModel)]="familyProductSelected" (change)="onChange()" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.name}}">{{familyProduct.name}}</option>
               </select>
               <input class="input" placeholder="Search here" style="padding-left: 55px">
               <button class="search-btn">Search</button>
