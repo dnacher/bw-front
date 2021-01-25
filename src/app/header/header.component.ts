@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataProductService} from "../services/data.product.service";
 import {FamilyProduct} from "../classes/FamilyProduct";
 import {AppComponent} from "../app.component";
@@ -8,6 +8,7 @@ import {JwtResponse} from "../classes/JwtResponse";
 import {JwtRequest} from "../classes/JwtRequest";
 import {DataUserService} from "../services/data.user.service";
 import {Router} from "@angular/router";
+import {HomeComponent} from "../home/home.component";
 
 @Component({
   selector: 'app-header',
@@ -19,16 +20,20 @@ export class HeaderComponent implements OnInit {
   constructor(private dataProductService: DataProductService,
               public appComponent: AppComponent,
               public dataUserService: DataUserService,
-              public router: Router) {
+              public router: Router,
+              public homeComponent: HomeComponent) {
   }
 
   public familyProducts: Array<FamilyProduct> = [];
   public jwtRequest: JwtRequest= new JwtRequest();
   public jwtResponse: JwtResponse = new JwtResponse();
+  public familyProductSelected:string='Todo';
+  public searchText:string='';
 
   ngOnInit() {
-    this.appComponent.checkCart();
+    console.log('Header');
     this.loadFamilyProducts();
+    this.appComponent.checkCart();
   }
 
   loadFamilyProducts(){
@@ -63,8 +68,6 @@ export class HeaderComponent implements OnInit {
   public getFullName(){
     if(this.appComponent.jwtResponse){
       return this.appComponent.jwtResponse.user.email;
-    }else{
-
     }
   }
 
@@ -136,4 +139,19 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
+
+  onChange() {
+   this.homeComponent.loadProduct(this.familyProductSelected);
+  }
+
+  search(){
+    console.log(this.searchText);
+    this.homeComponent.loadProductOnName(this.searchText);
+  }
+
+  selectValue() {
+    console.log('aqui', this.familyProducts[0].name);
+    this.familyProductSelected = this.familyProducts[0].name;
+  }
+
 }
