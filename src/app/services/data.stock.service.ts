@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import {ChangeDetectorRef, EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Observable, of} from 'rxjs';
 import {environment} from "../../environments/environment";
 import {Stock} from "../classes/Stock";
+import {HomeComponent} from "../home/home.component";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,10 @@ export class DataStockService {
 
   getStockById(id: any, token: string): Observable<any> {
     return this.http.get(`${this.baseUrl}` + '/stocks/' + `${id}`, this.setHeader(token));
+  }
+
+  getStockByProductName(name: any): Observable<any> {
+    return this.http.get(`${this.basePublicUrl}` + '/stocks/family_products/' + `${name}`);
   }
 
   saveStock(stock: Stock, token: string): Observable<any> {
