@@ -1,0 +1,34 @@
+.test{
+  height: 48px;
+  position: absolute;
+  top: 4px;
+  border-radius: 100rem;
+  text-align: center;
+  z-index: 1;
+  font-size: 1.6rem;
+}
+
+.test b{
+  display: block;
+  font-weight: normal;
+  position: relative;
+  top: .19em;
+}
+
+.test b small{}
+
+.test i{
+  font-size: .8rem;
+  position: relative;
+  top: -.4em;
+  font-style: normal;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+}
+
+//  label
+//    b
+//      small
+//    i
+//  /label
