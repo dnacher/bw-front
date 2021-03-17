@@ -10,8 +10,8 @@
       </ul>
       <ul class="header-links pull-right">
 <!--        <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-        <li *ngIf="!appComponent.isAuthenticated()"><a (click)="login()"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
-        <li *ngIf="appComponent.isAuthenticated()"><a><i class="fa fa-user-o"></i> {{getFullName()}} </a> <a (click)="logout()"> Logout <i class="fa fa-sign-out"></i></a> </li>
+        <li *ngIf="!appComponent.isAuthenticated()" style="color: white"><a (click)="login()"><i class="fa fa-user-alt" style="color: white"></i> Mi Cuenta</a></li>
+        <li *ngIf="appComponent.isAuthenticated()" style="color: white"><a><i class="fa fa-user-alt"></i> {{getFullName()}} </a> <a (click)="logout()"> Logout <i class="fa fa-sign-out"></i></a> </li>
       </ul>
     </div>
   </div>

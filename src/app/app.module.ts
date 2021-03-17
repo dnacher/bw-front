@@ -16,6 +16,11 @@ import {ToastrModule} from "ngx-toastr";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {FormsModule} from "@angular/forms";
 import { GeneralMenuComponent } from './general-menu/general-menu.component';
+import {AdminMenuComponent} from "./admin-dashboard/general-menu/admin-menu.component";
+import {AdminHomeComponent} from "./admin-dashboard/admin-home/admin-home.component";
+import {AdminFooterComponent} from "./admin-dashboard/footer/admin-footer";
+import {AdminBodyComponent} from "./admin-dashboard/body/admin-body.component";
+import {HighchartsChartModule} from "highcharts-angular";
 
 @NgModule({
   declarations: [
@@ -28,6 +33,10 @@ import { GeneralMenuComponent } from './general-menu/general-menu.component';
     ProductComponent,
     ThankyouComponent,
     GeneralMenuComponent,
+    AdminMenuComponent,
+    AdminHomeComponent,
+    AdminFooterComponent,
+    AdminBodyComponent
   ],
     imports: [
         BrowserModule,
@@ -37,7 +46,11 @@ import { GeneralMenuComponent } from './general-menu/general-menu.component';
         ToastrModule.forRoot(),
         NgxSpinnerModule,
         FormsModule,
+        HighchartsChartModule,
     ],
+  exports: [
+    HomeComponent,AppComponent
+  ],
   providers: [HomeComponent,AppComponent],
   bootstrap: [AppComponent]
 })

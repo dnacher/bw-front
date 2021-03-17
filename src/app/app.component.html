@@ -1,3 +1,13 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<div *ngIf="!isAdmin()">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+<div *ngIf="isAdmin()">
+  <app-admin-home></app-admin-home>
+</div>
+
+
+
+
+

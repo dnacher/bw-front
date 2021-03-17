@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import {JwtResponse} from "../../classes/JwtResponse";
+import {AppComponent} from "../../app.component";
 
 @Component({
-  selector: 'app-general-menu',
-  templateUrl: './general-menu.component.html',
-  styleUrls: ['./general-menu.component.scss']
+  selector: 'app-admin-general-menu',
+  templateUrl: './admin-menu.component.html',
+  styleUrls: ['./admin-menu.component.scss']
 })
-export class GeneralMenuComponent implements OnInit {
+export class AdminMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public appComponent: AppComponent) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    localStorage.setItem('jwtResponse',null);
+    this.appComponent.jwtResponse = new JwtResponse();
+  }
 }

@@ -46,6 +46,14 @@ export class AppComponent {
     return false;
   }
 
+  public isAdmin(): boolean {
+    if(this.isAuthenticated()){
+      return this.jwtResponse.user.userType.name=='Admin';
+    }else{
+      return false;
+    }
+  }
+
   public saveCartLocalStorage(){
     localStorage.setItem('cart',JSON.stringify(this.cart));
   }
