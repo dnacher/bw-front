@@ -3,6 +3,7 @@ import {Cart} from "./classes/Cart";
 import {CartLine} from "./classes/CartLine";
 import {User} from "./classes/User";
 import {JwtResponse} from "./classes/JwtResponse";
+import {Stock} from "./classes/Stock";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent {
   public cart = new Cart();
   public user: User;
   public jwtResponse: JwtResponse= new JwtResponse();
+  public allStock: Array<Stock> = [];
+  public familyProductSelected:string;
 
   public checkCart(){
     if(this.cart==null){

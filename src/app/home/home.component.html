@@ -1,17 +1,40 @@
+<!-- NAVIGATION -->
+<nav id="navigation">
+  <!-- container -->
+  <div class="container">
+    <!-- responsive-nav -->
+    <div id="responsive-nav">
+      <!-- NAV -->
+      <app-general-menu></app-general-menu>
+      <!-- /NAV -->
+    </div>
+    <!-- /responsive-nav -->
+  </div>
+  <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
 <!-- SECTION -->
+<div class="header-search col-md-6" style="margin: auto; width: 50%">
+  <select class="input-select" [(ngModel)]="this.appComponent.familyProductSelected" (change)="onChange()" [ngModelOptions]="{standalone: true}">
+    <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.name}}">{{familyProduct.name}}</option>
+  </select>
+  <input class="input" placeholder="Busca aqui" style="padding-left: 55px" [(ngModel)]="textSearch">
+  <button class="search-btn" (click)="loadProductOnName()">Buscar</button>
+</div>
 <div class="section">
   <!-- container -->
   <div class="container">
     <!-- Seleccion familia de productos -->
     <div class="row">
       <div class="col-md-4 col-xs-6" *ngFor="let md of metaDataList">
-        <div class="shop">
+        <div class="shop" (click)="loadFamilyProductsPromotion(md.familyProduct)">
           <div class="shop-img">
-            <img src={{md.sourceImg}} alt="">
+            <img src={{md.sourceImg}}>
           </div>
           <div class="shop-body">
-            <h3>Seleccion<br>{{md.familyProduct}}</h3>
-            <a href="#" class="cta-btn">Compra ahora <i class="fa fa-arrow-circle-right"></i></a>
+            <h3 *ngIf="md.familyProduct!='Diferente'">Seleccion<br>{{md.familyProduct}}</h3>
+            <h3 *ngIf="md.familyProduct=='Diferente'">Quiero algo<br>{{md.familyProduct}}</h3>
+            <a class="cta-btn">Compra ahora <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
@@ -38,7 +61,9 @@
         <div class="row">
           <div class="col-md-3 col-sm-3" *ngFor="let stock of stocks">
             <div class="card my-1">
-              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock,1)">
+<!--              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock,1)">-->
+              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="150px" class="card-img-top" style="cursor: pointer;" (click)="goToProduct(stock.product.id)">
+<!--              goToProduct-->
               <div class="card-header">
                 <div class="card-title">
                   <p *ngIf="stock.product.name.length>22">{{stock.product.name.substr(0,22) | titlecase}} ...</p>

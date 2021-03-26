@@ -17,30 +17,22 @@ import {HomeComponent} from "../home/home.component";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dataProductService: DataProductService,
-              public appComponent: AppComponent,
+  constructor(public appComponent: AppComponent,
               public dataUserService: DataUserService,
               public router: Router,
               public homeComponent: HomeComponent) {
   }
 
-  public familyProducts: Array<FamilyProduct> = [];
+
   public jwtRequest: JwtRequest= new JwtRequest();
   public jwtResponse: JwtResponse = new JwtResponse();
-  public familyProductSelected:string='Todo';
   public searchText:string='';
 
   ngOnInit() {
-    console.log('Header');
-    this.loadFamilyProducts();
     this.appComponent.checkCart();
   }
 
-  loadFamilyProducts(){
-    this.dataProductService.getFamilyProducts().subscribe(data =>{
-      this.familyProducts = data;
-    });
-  }
+
 
   deleteLine(line: CartLine) {
     swal.fire({
@@ -138,20 +130,6 @@ export class HeaderComponent implements OnInit {
         swal.showLoading()
       }
     })
-  }
-
-  onChange() {
-   this.homeComponent.loadProduct(this.familyProductSelected);
-  }
-
-  search(){
-    console.log(this.searchText);
-    this.homeComponent.loadProductOnName(this.searchText);
-  }
-
-  selectValue() {
-    console.log('aqui', this.familyProducts[0].name);
-    this.familyProductSelected = this.familyProducts[0].name;
   }
 
 }

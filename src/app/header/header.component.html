@@ -27,7 +27,7 @@
         <div class="col-md-3">
           <div class="header-logo">
             <a href="#">
-              <img src="/assets/img/logo.png" alt="" style="padding-top: 9px; margin-top: 10px;" width="260px" height="40px">
+<!--              <img src="/assets/img/logo.png" alt="" style="padding-top: 9px; margin-top: 10px;" width="260px" height="40px">-->
             </a>
           </div>
         </div>
@@ -35,15 +35,15 @@
 
         <!-- SEARCH BAR -->
         <div class="col-md-6">
-          <div class="header-search">
-            <form>
-              <select class="input-select" [(ngModel)]="familyProductSelected" (change)="onChange()" [ngModelOptions]="{standalone: true}">
-                <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.name}}">{{familyProduct.name}}</option>
-              </select>
-              <input class="input" placeholder="Search here" style="padding-left: 55px">
-              <button class="search-btn">Search</button>
-            </form>
-          </div>
+<!--          <div class="header-search">-->
+<!--            <form>-->
+<!--              <select class="input-select" [(ngModel)]="this.appComponent.familyProductSelected" (change)="onChange()" [ngModelOptions]="{standalone: true}">-->
+<!--                <option *ngFor="let familyProduct of familyProducts" value="{{familyProduct.name}}">{{familyProduct.name}}</option>-->
+<!--              </select>-->
+<!--              <input class="input" placeholder="Search here" style="padding-left: 55px">-->
+<!--              <button class="search-btn">Search</button>-->
+<!--            </form>-->
+<!--          </div>-->
         </div>
         <!-- /SEARCH BAR -->
 
@@ -117,19 +117,3 @@
   <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->
-
-<!-- NAVIGATION -->
-<nav id="navigation">
-  <!-- container -->
-  <div class="container">
-    <!-- responsive-nav -->
-    <div id="responsive-nav">
-      <!-- NAV -->
-      <app-general-menu></app-general-menu>
-      <!-- /NAV -->
-    </div>
-    <!-- /responsive-nav -->
-  </div>
-  <!-- /container -->
-</nav>
-<!-- /NAVIGATION -->

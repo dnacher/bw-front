@@ -446,7 +446,9 @@ textarea.input {
 #header {
   padding-top: 15px;
   padding-bottom: 15px;
+  /*background-image: url("/assets/img/Prueba5.png");*/
   background-color: #15161D;
+
 }
 
 .header-logo {
@@ -465,21 +467,21 @@ textarea.input {
   padding: 15px 0px;
 }
 
-.header-search form {
+.header-search {
   position: relative;
 }
 
-.header-search form .input-select {
+.header-search .input-select {
   margin-right: -4px;
   border-radius: 40px 0px 0px 40px;
 }
 
-.header-search form .input {
+.header-search .input {
   width: calc(100% - 260px);
   margin-right: -4px;
 }
 
-.header-search form .search-btn {
+.header-search .search-btn {
   height: 40px;
   width: 100px;
   background: #00B0F0;
@@ -725,6 +727,7 @@ textarea.input {
   bottom: 0;
   left: 0px;
   width: 60%;
+  /*background: #ab7b32;*/
   background: #00B0F0;
   opacity: 0.9;
   -webkit-transform: skewX(-45deg);
@@ -739,6 +742,7 @@ textarea.input {
   bottom: 0;
   left: 1px;
   width: 100%;
+  /*background: #ab7b32;*/
   background: #00B0F0;
   opacity: 0.9;
   -webkit-transform: skewX(-45deg) translateX(-100%);

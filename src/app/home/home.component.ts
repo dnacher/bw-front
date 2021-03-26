@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {MetaData} from "../classes/metaData";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DataStockService} from "../services/data.stock.service";
 import {Stock} from "../classes/Stock";
 import {CartLine} from "../classes/CartLine";
 import {AppComponent} from "../app.component";
 import {ToastrService} from "ngx-toastr";
 import Swal from "sweetalert2";
+import {DataProductService} from "../services/data.product.service";
+import {FamilyProduct} from "../classes/FamilyProduct";
 
 @Component({
   selector: 'app-home',
@@ -16,48 +18,61 @@ import Swal from "sweetalert2";
 export class HomeComponent implements OnInit {
 
   public metaDataList: Array<MetaData> = [];
+  public id: string='';
+  public familyProducts: Array<FamilyProduct> = [];
   public stocks: Array<Stock> = [];
+  public textSearch: string = '';
 
   constructor(private dataStockService: DataStockService,
+              private dataProductService: DataProductService,
               private router: Router,
               public appComponent: AppComponent,
-              private toast: ToastrService) { }
+              private toast: ToastrService,
+              public route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadFamilyProducts();
     this.appComponent.checkCart();
     this.loadMetaData();
-    this.loadProduct('Todo');
+    this.loadProduct();
   }
 
-  public loadProduct(name){
-    console.log(name);
-    this.stocks= new Array<Stock>();
-    this.dataStockService.getStocks().subscribe(data => {
-      this.stocks = data;
-      if(name!='Todo'){
-        this.stocks = this.stocks.filter(s=>{
-          return s.product.familyProduct.name==name;
-        });
-      }
-      console.log('onload stock ',this.stocks);
+  loadFamilyProducts(){
+    this.dataProductService.getFamilyProducts().subscribe(data =>{
+      this.familyProducts = data;
+      this.appComponent.familyProductSelected= this.familyProducts[0].name;
     });
   }
 
-  public loadProductOnName(name){
-    console.log(name);
+  public loadProduct(){
+    this.stocks= new Array<Stock>();
     this.dataStockService.getStocks().subscribe(data => {
       this.stocks = data;
-        this.stocks = this.stocks.filter(s=>{
-          return s.product.name.startsWith(name);
+      if(this.appComponent.familyProductSelected!='Todo'){
+        let newStocks: Array<Stock> = [];
+        for(let stock of this.stocks){
+          if(stock.product.familyProduct.name==this.appComponent.familyProductSelected){
+            newStocks.push(stock);
+          }
+        }
+        this.stocks = newStocks;
+      }
+    });
+  }
+
+  public loadProductOnName(){
+    this.dataStockService.getStocks().subscribe(data => {
+      this.stocks = data;
+      this.stocks = this.stocks.filter(s=>{
+          return s.product.name.startsWith(this.textSearch);
         });
-      console.log('onload stock ',this.stocks);
     });
   }
 
   loadMetaData(){
-    this.metaDataList.push(new MetaData('Pescados','../../assets/img/shop01.png'),
-                          new MetaData('Carnes','../../assets/img/shop02.png'),
-                          new MetaData('Pasta','../../assets/img/shop03.png'));
+    this.metaDataList.push(new MetaData('Diferente','../../assets/img/shop01.png'),
+                          new MetaData('Familiar','../../assets/img/shop02.png'),
+                          new MetaData('Ensaladas','../../assets/img/shop03.png'));
   }
 
   selectProduct(stock: Stock, value: number) {
@@ -151,5 +166,19 @@ export class HomeComponent implements OnInit {
          this.selectProduct(stock,value);
        }
      });
+  }
+
+  onChange() {
+    this.loadProduct();
+  }
+
+  loadFamilyProductsPromotion(familyProduct: string) {
+    if(familyProduct!='Diferente'){
+      this.appComponent.familyProductSelected=familyProduct;
+    }else{
+      const random = Math.floor(Math.random() * this.familyProducts.length);
+      this.appComponent.familyProductSelected= this.familyProducts[random].name;
+    }
+    this.loadProduct();
   }
 }
