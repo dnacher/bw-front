@@ -1,5 +1,5 @@
 <!-- BREADCRUMB -->
-<div *ngIf="!(isLoading)">
+<div *ngIf="stock!=null">
 <div id="breadcrumb" class="section">
   <!-- container -->
   <div class="container">
@@ -9,7 +9,7 @@
         <ul class="breadcrumb-tree">
           <li><a href="/">Home</a></li>
           <li><a href="/">Todas las categorias</a></li>
-          <li><a>{{stock.product.familyProduct.name}}</a></li>
+          <li><a (click)="goToFamily()">{{stock.product.familyProduct.name}}</a></li>
           <li class="active">{{stock.product.name}}</li>
         </ul>
       </div>
@@ -76,12 +76,12 @@
             <div class="qty-label">
               Qty
               <div class="input-number">
-                <input type="number" [value]="qty">
+                <input type="number" [(ngModel)]="qty">
                 <span class="qty-up" (click)="add()">+</span>
                 <span class="qty-down" (click)="remove()">-</span>
               </div>
             </div>
-            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Agregar al carrito</button>
+            <button class="add-to-cart-btn" (click)="selectComponent()"><i class="fa fa-shopping-cart"></i> Agregar al carrito</button>
           </div>
 
           <ul class="product-links">
