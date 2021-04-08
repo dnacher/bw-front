@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
               public homeComponent: HomeComponent) {
   }
 
-
   public jwtRequest: JwtRequest= new JwtRequest();
   public jwtResponse: JwtResponse = new JwtResponse();
   public searchText:string='';
@@ -31,8 +30,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.appComponent.checkCart();
   }
-
-
 
   deleteLine(line: CartLine) {
     swal.fire({
@@ -51,8 +48,9 @@ export class HeaderComponent implements OnInit {
           'El producto se borro de tu pedido',
           'success'
         )
-        this.appComponent.deleteCartLine(line);
-        this.appComponent.saveCartLocalStorage();
+        this.appComponent.processDeleteProduct(line);
+        // this.appComponent.deleteCartLine(line);
+        // this.appComponent.saveCartToLocalStorage(this.appComponent.cart);
       }
     })
   }
