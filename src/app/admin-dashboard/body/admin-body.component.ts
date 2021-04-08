@@ -91,6 +91,12 @@ export class AdminBodyComponent implements AfterViewInit {
     }
   };
   piechartOptions: Highcharts.Options = {
+    title: {
+      text:'Productos Mas vendidos',
+      style: {
+        color: '#00A8FF'
+      }
+    },
     series: [
       {
         name: 'Mas vendidos',
@@ -144,7 +150,10 @@ export class AdminBodyComponent implements AfterViewInit {
     var locations = [
       ["Cliente 110", -34.871151, -56.116717],
       ["Cliente 045", -34.872559, -56.114632],
-      ["Cliente 178", -34.871870, -56.119797]
+      ["Cliente 178", -34.871470, -56.113797],
+      ["Cliente 178", -34.871370, -56.118797],
+      ["Cliente 014", -34.871770, -56.112797],
+      ["Cliente 026", -34.874870, -56.115797]
     ];
 
     for (var i = 0; i < locations.length; i++) {
