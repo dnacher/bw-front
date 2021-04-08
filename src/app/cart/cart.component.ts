@@ -38,7 +38,7 @@ export class CartComponent implements OnInit {
               'El producto se borro de tu pedido',
               'success'
             )
-            this.appComponent.deleteCartLine(cl);
+            this.appComponent.processDeleteProduct(cl);
           }
         })
       }
@@ -47,7 +47,7 @@ export class CartComponent implements OnInit {
   }
 
   deleteLine(c: CartLine) {
-    this.appComponent.deleteCartLine(c);
+    this.appComponent.processDeleteProduct(c);
   }
 
 }
