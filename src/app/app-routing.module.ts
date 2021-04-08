@@ -11,6 +11,9 @@ const routes: Routes = [
     path: '', component: HomeComponent
   },
   {
+    path: ':familyProduct', component: HomeComponent
+  },
+  {
     path: 'product/:id', component: ProductComponent
   },
   {
