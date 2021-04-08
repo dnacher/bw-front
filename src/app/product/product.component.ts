@@ -1,9 +1,10 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AppComponent} from "../app.component";
 import {Stock} from "../classes/Stock";
 import {DataStockService} from "../services/data.stock.service";
 import {HomeComponent} from "../home/home.component";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-product',
@@ -15,15 +16,14 @@ export class ProductComponent implements OnInit {
   constructor(public route: ActivatedRoute,
               public appComponent: AppComponent,
               public homeComponent: HomeComponent,
-              private dataStockService: DataStockService,) { }
+              private dataStockService: DataStockService,
+              private router: Router) { }
 
   public qty: number=1;
   public id: number;
-  public stock: Stock;
-  isLoading: boolean = false;
+  public stock: Stock=new Stock();
 
   ngOnInit() {
-    this.isLoading = true;
     this.route.paramMap.subscribe(params => {
       this.id = +params.get("id")
     });
@@ -47,7 +47,6 @@ export class ProductComponent implements OnInit {
           });
       });
     }
-    this.isLoading = false;
   }
 
   add() {
@@ -55,9 +54,28 @@ export class ProductComponent implements OnInit {
   }
 
   remove(){
-    if(this.qty>0) {
+    if(this.qty>1) {
       this.qty -= 1;
     }
   }
 
+  selectComponent() {
+    console.log(this.qty);
+    this.appComponent.processAddProduct(this.stock,this.qty);
+    Swal.fire({
+      icon: "success",
+      title: 'Producto Agregado',
+      html: 'Se agrego '+ this.stock.product.name,
+      timer: 900,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
+    this.router.navigate(['/']).then();
+  }
+
+  goToFamily() {
+    this.router.navigate(['/',this.stock.product.familyProduct.name]).then();
+  }
 }
