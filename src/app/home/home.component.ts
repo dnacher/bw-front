@@ -124,6 +124,11 @@ export class HomeComponent implements OnInit {
   }
 
   onChange() {
+    if(this.appComponent.familyProductSelected!='Todo'){
+      this.router.navigate(['/category/',this.appComponent.familyProductSelected]).then();
+    }else{
+      this.router.navigate(['/']).then();
+    }
     this.loadProduct();
   }
 

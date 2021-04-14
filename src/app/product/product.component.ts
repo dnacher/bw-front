@@ -76,6 +76,6 @@ export class ProductComponent implements OnInit {
   }
 
   goToFamily() {
-    this.router.navigate(['/',this.stock.product.familyProduct.name]).then();
+    this.router.navigate(['/category/',this.stock.product.familyProduct.name]).then();
   }
 }
