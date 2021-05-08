@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^8.2.14",
+    "@angular/core": "^11.2.13",
     "@angular/forms": "^8.2.14",
     "@angular/material-moment-adapter": "5.2.1",
     "@angular/platform-browser": "^8.2.14",
@@ -31,28 +32,27 @@
     "karma-jasmine": "~2.0.1",
     "leaflet": "1.7.1",
     "material-design-icons": "^3.0.1",
-    "ng2-charts": "^2.4.1",
+    "ng2-charts": "^2.4.2",
     "ngx-pagination": "^4.1.0",
-    "ngx-spinner": "^8.1.0",
-    "ngx-toastr": "^10.0.4",
+    "ngx-spinner": "^11.0.1",
+    "ngx-toastr": "^10.2.0",
     "path": "^0.12.7",
     "rxjs": "~6.4.0",
+    "rxjs-compat": "^6.6.7",
     "sweetalert2": "^10.16.7",
     "ts-node": "~7.0.0",
-    "tslib": "^1.14.1",
+    "tslib": "^1.9.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3",
     "typings": "^2.1.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.24",
+    "@angular-devkit/build-angular": "~0.803.29",
     "@angular/cdk": "^5.2.5",
-    "@angular/cli": "^8.3.29",
+    "@angular/cli": "^11.2.12",
     "@angular/common": "^8.2.14",
     "@angular/compiler": "^8.2.14",
     "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "^5.2.11",
     "@angular/language-service": "^8.2.14",
     "@angular/material": "^5.2.5",
     "@types/core-js": "^2.5.3",
@@ -62,7 +62,8 @@
     "enhanced-resolve": "^3.4.1",
     "karma": "^5.1.0",
     "karma-jasmine-html-reporter": "^1.6.0",
-    "protractor": "^7.0.0"
+    "protractor": "^7.0.0",
+    "typescript": "^3.4.5"
   },
   "resolutions": {
     "@babel/preset-env": "7.5.5"
