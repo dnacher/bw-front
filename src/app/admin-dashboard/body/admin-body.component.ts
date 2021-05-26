@@ -74,11 +74,11 @@ export class AdminBodyComponent implements AfterViewInit {
     defs: {
       gradient0: {
         tagName: 'linearGradient',
-        id: 'gradient0',
-        x1: 0,
-        y1: 0,
-        x2: 0,
-        y2: 1,
+        // id: 'gradient0',
+        // x1: 0,
+        // y1: 0,
+        // x2: 0,
+        // y2: 1,
         children: [
           {
             tagName: 'stop'

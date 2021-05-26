@@ -26,7 +26,7 @@
   <div class="container">
     <!-- Seleccion familia de productos -->
     <div class="row">
-      <div class="col-md-4 col-xs-6" *ngFor="let md of metaDataList">
+      <div class="col-md-4" *ngFor="let md of metaDataList">
         <div class="shop" (click)="loadFamilyProductsPromotion(md.familyProduct)">
           <div class="shop-img">
             <img src={{md.sourceImg}}>
@@ -59,17 +59,42 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3 col-sm-3" *ngFor="let stock of stocks">
+          <div class="col-sm-8" style="margin-left: 10%" *ngFor="let stock of stocks">
             <div class="card my-1">
-<!--              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="200px" class="card-img-top" style="cursor: pointer;" (click)="selectProduct(stock,1)">-->
-              <img [src]="stock.product.imageUrl" alt="{{stock.product.name}}" width="150px" class="card-img-top" style="cursor: pointer;" (click)="goToProduct(stock.product.id)">
-<!--              goToProduct-->
-              <div class="card-header">
-                <div class="card-title">
-                  <p *ngIf="stock.product.name.length>22">{{stock.product.name.substr(0,22) | titlecase}} ...</p>
-                  <p *ngIf="stock.product.name.length<=22">{{stock.product.name | titlecase}}</p>
-                  <p class="my-3" align="center">{{stock.product.price | currency: 'USD'}}
-                    <i class="fa fa-plus-circle" (click)="selectProductValue(stock)"></i></p>
+              <div class="row g-0">
+                <div class="col-2">
+                  <img [src]="stock.product.imageUrl"
+                       alt="{{stock.product.name}}"
+                       height="100px"
+                       width="60px"
+                       class="card-img-top" style="cursor: pointer;" (click)="goToProduct(stock.product.id)">
+                </div>
+                <div class="col-4">
+                  <div class="card-header">
+                    <div class="card-title">
+                      <p *ngIf="stock.product.name.length>TEXT_LENGTH" (click)="goToProduct(stock.product.id)">{{stock.product.name.substr(0,TEXT_LENGTH) | titlecase}} ...</p>
+                      <p *ngIf="stock.product.name.length<=TEXT_LENGTH" (click)="goToProduct(stock.product.id)">{{stock.product.name | titlecase}}</p>
+                      <p class="my-3" (click)="goToProduct(stock.product.id)">{{stock.product.price | currency: 'USD'}}
+                        <i class="fa fa-plus-circle" (click)="selectProductValue(stock)"></i></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="card-body">
+                    <div  class="card-text">
+                      <p>{{stock.branchOffice.company.name}}</p>
+                      <div class="col-4">
+                        <img [src]="stock.product.imageUrl"
+                             alt="{{stock.product.name}}"
+                             class="card-img-top" style="cursor: pointer; opacity: 0.5;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="card-body">
+                    <p align="right" size="24"><i class="fas fa-star"></i> {{stock.branchOffice.score}}</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   public stocks: Array<Stock> = [];
   public textSearch: string = '';
   public param: string;
+  public readonly TEXT_LENGTH:number  = 20;
   constructor(private dataStockService: DataStockService,
               private dataProductService: DataProductService,
               private router: Router,
