@@ -21,28 +21,28 @@
   <input class="input" placeholder="Busca aqui" style="padding-left: 55px" [(ngModel)]="textSearch">
   <button class="search-btn" (click)="loadProductOnName()">Buscar</button>
 </div>
-<div class="section">
-  <!-- container -->
-  <div class="container">
-    <!-- Seleccion familia de productos -->
-    <div class="row">
-      <div class="col-md-4" *ngFor="let md of metaDataList">
-        <div class="shop" (click)="loadFamilyProductsPromotion(md.familyProduct)">
-          <div class="shop-img">
-            <img src={{md.sourceImg}}>
-          </div>
-          <div class="shop-body">
-            <h3 *ngIf="md.familyProduct!='Diferente'">Seleccion<br>{{md.familyProduct}}</h3>
-            <h3 *ngIf="md.familyProduct=='Diferente'">Quiero algo<br>{{md.familyProduct}}</h3>
-            <a class="cta-btn">Compra ahora <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /Seleccion familia de productos -->
-  </div>
-  <!-- /container -->
-</div>
+<!--<div class="section">-->
+<!--  &lt;!&ndash; container &ndash;&gt;-->
+<!--  <div class="container">-->
+<!--    &lt;!&ndash; Seleccion familia de productos &ndash;&gt;-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-4" *ngFor="let md of metaDataList">-->
+<!--        <div class="shop" (click)="loadFamilyProductsPromotion(md.familyProduct)">-->
+<!--          <div class="shop-img">-->
+<!--            <img src={{md.sourceImg}}>-->
+<!--          </div>-->
+<!--          <div class="shop-body">-->
+<!--            <h3 *ngIf="md.familyProduct!='Diferente'">Seleccion<br>{{md.familyProduct}}</h3>-->
+<!--            <h3 *ngIf="md.familyProduct=='Diferente'">Quiero algo<br>{{md.familyProduct}}</h3>-->
+<!--            <a class="cta-btn">Compra ahora <i class="fa fa-arrow-circle-right"></i></a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; /Seleccion familia de productos &ndash;&gt;-->
+<!--  </div>-->
+<!--  &lt;!&ndash; /container &ndash;&gt;-->
+<!--</div>-->
 <!-- /SECTION -->
 
 <!-- SECTION -->
